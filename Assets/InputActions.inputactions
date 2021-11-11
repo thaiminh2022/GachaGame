@@ -1,0 +1,33 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Move",
+            "id": "122d20d9-2353-43b3-88d0-8a6c009e23fe",
+            "actions": [
+                {
+                    "name": "move",
+                    "type": "Button",
+                    "id": "28079a89-e8b0-4479-b5e1-66596753ff7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2695807e-0b26-4aff-a7d4-4c0a0e2f2543",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
