@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Introduction : MonoBehaviour
@@ -18,6 +17,9 @@ public class Introduction : MonoBehaviour
 
     [Header("Background Scrolls")]
     [SerializeField] private GameObject scrollIntroGameObject;
+    [SerializeField] private Texture fightingTexture;
+    [SerializeField] ParticleSystem playingParticleSystem;
+    [SerializeField] Canvas blurCavas;
     [Range(-1, 1)]
     public float scrollIntroSpeed;
     private float scrollIntroOffset;
@@ -32,27 +34,47 @@ public class Introduction : MonoBehaviour
 
     private void Update()
     {
-        if (GameState.instance.gameState != GameStates.Intro) return;
-        if (index > AllMovePosition.Length - 1) GameState.instance.gameState = GameStates.Spawning;
+        MoveTextureIntro();
 
+        if (GameState.instance.gameState != GameStates.Intro) return;
+
+        if (index > AllMovePosition.Length - 1)
+        {
+            FinishedMoving();
+
+            return;
+        }
 
         if (index == 0)
         {
             rocketMoveSpeed = 1;
         }
-        else
+        else if (index > 0 && index <= AllMovePosition.Length - 1)
         {
             rocketMoveSpeed = 3;
             scrollIntroSpeed = 1;
+            scrollSpeedDevider = Mathf.Lerp(scrollSpeedDevider, .1f, Time.deltaTime);
+            blurCavas.GetComponent<CanvasGroup>().alpha += Mathf.Clamp(Time.deltaTime / 2, 0, 1);
         }
 
-
-        MoveTextureIntro();
         MoveIntro();
 
         if (canMove == true)
         {
             OnMove();
+        }
+    }
+
+    private void FinishedMoving()
+    {
+        material.SetTexture("_MainTex", fightingTexture);
+        scrollSpeedDevider = Mathf.Lerp(scrollSpeedDevider, 5, Time.deltaTime);
+        blurCavas.GetComponent<CanvasGroup>().alpha -= Mathf.Clamp(Time.deltaTime, 0, 1);
+
+        if (blurCavas.GetComponent<CanvasGroup>().alpha <= 0)
+        {
+            playingParticleSystem.Play();
+            GameState.instance.gameState = GameStates.Spawning;
         }
     }
 
@@ -75,6 +97,7 @@ public class Introduction : MonoBehaviour
     }
     private void OnMove()
     {
+
         player.position = Vector2.Lerp(player.position, AllMovePosition[index].position, Time.deltaTime * rocketMoveSpeed);
         if (Vector2.Distance(player.position, AllMovePosition[index].position) < 0.03)
         {

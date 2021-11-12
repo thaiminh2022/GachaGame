@@ -16,7 +16,10 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
     private Rigidbody2D rb;
     private Vector3 touchPosition;
     private Touch touch;
+    [Header("Events")]
     public UnityEvent OnTouchingTheScreen;
+    public UnityEvent OnKillAChicken;
+
     [Header("Rocket Current Stat")]
     public BulletObject bulletObject;
     [SerializeField] GameObject spreadBullet;
@@ -25,7 +28,9 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
     private bool bulletAlreadySpawn = false;
 
     // TODO: [SerializeField] LineRenderer lazerBullet;
-    public float chickenKillCounts;
+    public int chickenKillCounts;
+    [SerializeField]
+    private bool DebugNoPhone = true;
 
     private void Awake()
     {
@@ -54,8 +59,8 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
             OnTouchingTheScreen?.Invoke();
         }
 
-        // ! Only for testing, comments this line out before build
-        //ShootBullet();
+        // ! Only for testing, turn of DebugNoPhone in editor before build;
+        if (DebugNoPhone == true) ShootBullet();
     }
 
     // Move the ship bt touching using Transform with lerp for smoothness
@@ -95,6 +100,11 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
 
 
     }
+    public void KillAChiken()
+    {
+        chickenKillCounts++;
+    }
+
 
     #region BulletChoosingMethod
     private IEnumerator BulletSpread()

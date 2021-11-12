@@ -53,7 +53,7 @@ public class ChickenEnemy : MonoBehaviour, IDamageAble
 
         if (hitTaken >= chickenObject.maxHitTaken)
         {
-            PlayerRocketController.instance.chickenKillCounts++;
+            PlayerRocketController.instance.OnKillAChicken?.Invoke();
             Destroy(gameObject);
         }
 

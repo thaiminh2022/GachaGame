@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 public class ChickenSpawner : MonoBehaviour
 {
     [Header("Objects")]
-    public static ChickenSpawner chickenSpawner;
+    public static ChickenSpawner instance;
     [SerializeField] float spawnTime;
+    [SerializeField] Transform[] allPositbleSpawnPosition;
+
     public SpawnObject[] spawnObjects;
 
     [Header("Spawn Logics")]
@@ -17,10 +20,17 @@ public class ChickenSpawner : MonoBehaviour
     private GameObject[] chickenBatches;
     public GameObject choosenChickenSpawnbatch = null;
 
+    [Header("Time")]
+    [SerializeField] private float startTimeBeforeNewPhase = 0;
+    private float timeBeforeNewPhase;
+
+    [Header("Events")]
+    [Tooltip("Ivoke at the start and every times when a phase is clear")] public UnityEvent OnFinishedAPhase;
+    public UnityEvent OnFinishedTheGame;
     private void Awake()
     {
-        if (chickenSpawner == null) chickenSpawner = this;
-        else if (chickenSpawner != this) Destroy(gameObject);
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
     }
     private void Start()
     {
@@ -29,13 +39,18 @@ public class ChickenSpawner : MonoBehaviour
         maxIndex = spawnObjects.Length - 1;
 
         chickenBatches = GameObject.FindGameObjectsWithTag("SpawnBatch");
+
+        // Invoke this for the text to Update
+        OnFinishedAPhase?.Invoke();
     }
     private void Update()
     {
         // if the phase index > maxIndex mark it the end or boss battle
-        if (index > maxIndex)
+        if (index > maxIndex && index < maxIndex + 2)
         {
             GameState.instance.gameState = GameStates.End;
+            OnFinishedTheGame?.Invoke();
+            index++;
             return;
 
         }
@@ -66,7 +81,7 @@ public class ChickenSpawner : MonoBehaviour
         for (int i = 0; i < spawnObjects[index].ammout; i++)
         {
             int rand = Random.Range(0, spawnObjects[index].posibleChickenSpawn.Length);
-            Instantiate(spawnObjects[index].posibleChickenSpawn[rand], transform.position, Quaternion.identity);
+            Instantiate(spawnObjects[index].posibleChickenSpawn[rand], ChooseRandomSpawnPosition(), Quaternion.identity);
             yield return new WaitForSeconds(spawnTime);
         }
         spawnState = SpawnStates.Finished;
@@ -83,8 +98,18 @@ public class ChickenSpawner : MonoBehaviour
     }
     private void NoEnemyLeft()
     {
-        index++;
-        GameState.instance.gameState = GameStates.Spawning;
+        if (timeBeforeNewPhase <= 0)
+        {
+
+            OnFinishedAPhase?.Invoke();
+            index++;
+            GameState.instance.gameState = GameStates.Spawning;
+            timeBeforeNewPhase = startTimeBeforeNewPhase;
+        }
+        else
+        {
+            timeBeforeNewPhase -= Time.deltaTime;
+        }
     }
     private GameObject ChooseRandomChickenBatch()
     {
@@ -93,6 +118,11 @@ public class ChickenSpawner : MonoBehaviour
         Debug.Log("Choosen chicken batch: " + chickenBatches[a].name);
 
         return chickenBatches[a];
+    }
+    private Vector3 ChooseRandomSpawnPosition()
+    {
+        int a = Random.Range(0, allPositbleSpawnPosition.Length);
+        return allPositbleSpawnPosition[a].position;
     }
 
 }

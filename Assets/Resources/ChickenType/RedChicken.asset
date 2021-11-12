@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: RedChicken
   m_EditorClassIdentifier: 
   name: RedChicken
-  maxHitTaken: 15
+  maxHitTaken: 20
   chickenType: 3
+  eggBullet: {fileID: 5227765235849713959, guid: 70c3c8d9516413b4faddb70133b6583e, type: 3}

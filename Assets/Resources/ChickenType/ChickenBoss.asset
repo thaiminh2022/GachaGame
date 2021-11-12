@@ -15,3 +15,4 @@ MonoBehaviour:
   name: ChickenBoss
   maxHitTaken: 100
   chickenType: 4
+  eggBullet: {fileID: 5227765235849713959, guid: 70c3c8d9516413b4faddb70133b6583e, type: 3}
