@@ -96,13 +96,25 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
             case BulletTypes.LazerTarget:
                 break;
         }
-
-
-
     }
     public void KillAChiken()
     {
         chickenKillCounts++;
+    }
+    public void TouchALootBox(BulletTypes lootBoxType)
+    {
+        switch (lootBoxType)
+        {
+            case BulletTypes.Auto:
+                SwitchToBulletAuto();
+                break;
+            case BulletTypes.Spread:
+                SwitchToBulletSpread();
+                break;
+            default:
+                Debug.Log("Cannot find the type of lootbox");
+                break;
+        }
     }
 
 
@@ -157,7 +169,7 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
             default:
                 break;
         }
-        yield return new WaitForSeconds(bulletObject.bulletSpeed);
+        yield return new WaitForSeconds(bulletObject.bulletDelay);
         bulletAlreadySpawn = false;
     }
     private IEnumerator BulletAuto()
@@ -195,11 +207,34 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
             default:
                 break;
         }
-        yield return new WaitForSeconds(bulletObject.bulletSpeed);
+        yield return new WaitForSeconds(bulletObject.bulletDelay);
         bulletAlreadySpawn = false;
     }
     #endregion
+    #region BulletSwitchingMethods
+    private void SwitchToBulletAuto()
+    {
+        if (bulletObject.bulletType == BulletTypes.Auto)
+        {
+            bulletLevel++;
+            return;
+        }
+        bulletObject = (BulletObject)Resources.Load("BulletType/AutoBullet");
+        bulletLevel = 1;
 
+    }
+    private void SwitchToBulletSpread()
+    {
+        if (bulletObject.bulletType == BulletTypes.Spread)
+        {
+            bulletLevel++;
+            return;
+        }
+        bulletObject = (BulletObject)Resources.Load("BulletType/SpreadBullet");
+        bulletLevel = 1;
+
+    }
+    #endregion
     public void TakeDamage()
     {
         Debug.Log("Ouch!");

@@ -20,10 +20,6 @@ public class ChickenSpawner : MonoBehaviour
     private GameObject[] chickenBatches;
     public GameObject choosenChickenSpawnbatch = null;
 
-    [Header("Time")]
-    [SerializeField] private float startTimeBeforeNewPhase = 0;
-    private float timeBeforeNewPhase;
-
     [Header("Events")]
     [Tooltip("Ivoke at the start and every times when a phase is clear")] public UnityEvent OnFinishedAPhase;
     public UnityEvent OnFinishedTheGame;
@@ -98,26 +94,18 @@ public class ChickenSpawner : MonoBehaviour
     }
     private void NoEnemyLeft()
     {
-        if (timeBeforeNewPhase <= 0)
-        {
+        OnFinishedAPhase?.Invoke();
+        index++;
+        GameState.instance.gameState = GameStates.Spawning;
 
-            OnFinishedAPhase?.Invoke();
-            index++;
-            GameState.instance.gameState = GameStates.Spawning;
-            timeBeforeNewPhase = startTimeBeforeNewPhase;
-        }
-        else
-        {
-            timeBeforeNewPhase -= Time.deltaTime;
-        }
     }
     private GameObject ChooseRandomChickenBatch()
     {
-        var a = Random.Range(0, chickenBatches.Length);
+        var rand = Random.Range(0, chickenBatches.Length);
 
-        Debug.Log("Choosen chicken batch: " + chickenBatches[a].name);
+        Debug.Log("Choosen chicken batch: " + chickenBatches[rand].name);
 
-        return chickenBatches[a];
+        return chickenBatches[rand];
     }
     private Vector3 ChooseRandomSpawnPosition()
     {

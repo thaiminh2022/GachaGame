@@ -5,7 +5,7 @@ public class BulletObject : ScriptableObject
 {
     public new string name;
     public BulletTypes bulletType;
-    public float bulletSpeed = 0.3f;
+    public float bulletDelay = 0.3f;
 
     // ?[Range(0, 5)] public int bulletLevel = 0;
 
