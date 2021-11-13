@@ -16,4 +16,10 @@ public class CounterHandeler : MonoBehaviour
         string phase = ChickenSpawner.instance.spawnObjects[ChickenSpawner.instance.index].name;
         currentPhase.text = "Phase: " + phase;
     }
+
+
+    public void DisableSelf()
+    {
+        gameObject.SetActive(false);
+    }
 }

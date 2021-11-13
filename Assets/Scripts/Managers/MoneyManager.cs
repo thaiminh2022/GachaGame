@@ -32,7 +32,6 @@ public class MoneyManager : MonoBehaviour
     }
 
 
-
     // Directly set the money
     // !not recommend to use this
     public void SetMoney(float newMoneyValue)
