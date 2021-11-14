@@ -117,7 +117,8 @@ MonoBehaviour:
   chickenObject: {fileID: 11400000, guid: 96ff3cbd8492e274a899c6b534512cf6, type: 2}
   isIdeling: 0
   eggLayed: 0
-  eggLayRate: 2
+  minEggLayRate: 2
+  maxEggLayRate: 8
   eggLayPosition: {fileID: 5597970009526718562}
 --- !u!114 &3877398078859648901
 MonoBehaviour:

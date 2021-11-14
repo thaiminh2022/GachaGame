@@ -99,6 +99,20 @@ public class ChickenSpawner : MonoBehaviour
         GameState.instance.gameState = GameStates.Spawning;
 
     }
+    public void DestroyAllCurrentEnemy()
+    {
+        GameObject[] enemyleft = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var item in enemyleft)
+        {
+            Destroy(item);
+        }
+    }
+    public void SetIndexToMaxPlusOne()
+    {
+        index = maxIndex + 1;
+    }
+
+
     private GameObject ChooseRandomChickenBatch()
     {
         var rand = Random.Range(0, chickenBatches.Length);

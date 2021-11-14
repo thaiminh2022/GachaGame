@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: YellowBullet
   bulletType: 2
-  bulletDelay: 0.5
+  bulletDelay: 0.35

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerGachaControl : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerGachaControl : MonoBehaviour
 
     [Header("Gotten items")]
     private List<ItemsObject> itemGotAfterRoll = new List<ItemsObject>();
+
+    [Header("Text UI")]
+    [SerializeField] private TextMeshProUGUI allRolledObjectsDisplayText;
 
     [Header("Others check")]
     private bool fiveStars = false;
@@ -114,6 +118,17 @@ public class PlayerGachaControl : MonoBehaviour
         return null;
 
     }
+
+    //TODO: ADD A SPECIAL DISPLAY WHEN AN ITEM IS DUPICATE
+    public void DisplayRolledItem()
+    {
+        allRolledObjectsDisplayText.text = "";
+        foreach (var item in itemGotAfterRoll)
+        {
+            allRolledObjectsDisplayText.text += item.name + "\n";
+        }
+    }
+
     private void Start()
     {
         costPerTenRoll = costPerOneRoll * 10;

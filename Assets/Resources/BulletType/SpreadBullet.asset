@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: RedBullet
   bulletType: 0
-  bulletDelay: 1
+  bulletDelay: 0.69

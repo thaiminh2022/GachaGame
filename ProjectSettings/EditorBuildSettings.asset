@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/BanGa.unity
+    guid: ee1feee104099cb4296fe8f4cb764272
+  - enabled: 1
+    path: Assets/Scenes/PopCat.unity
+    guid: 5b01e0e7ddd2a5b4bacd6f135efd3630
   m_configObjects: {}

@@ -1,4 +1,4 @@
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 
 public class Introduction : MonoBehaviour
@@ -14,6 +14,8 @@ public class Introduction : MonoBehaviour
     [SerializeField] private bool canMove = false;
     [SerializeField] private int index;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI introtext;
 
     [Header("Background Scrolls")]
     [SerializeField] private GameObject scrollIntroGameObject;
@@ -30,6 +32,7 @@ public class Introduction : MonoBehaviour
     private void Start()
     {
         material = scrollIntroGameObject.GetComponent<Renderer>().material;
+        introtext.alpha = 0;
     }
 
     private void Update()
@@ -48,6 +51,8 @@ public class Introduction : MonoBehaviour
         if (index == 0)
         {
             rocketMoveSpeed = 1;
+            introtext.alpha += Mathf.Clamp(Time.deltaTime / 2, 0, 255);
+            introtext.rectTransform.position += introtext.rectTransform.transform.up * Time.deltaTime * 100;
         }
         else if (index > 0 && index <= AllMovePosition.Length - 1)
         {
@@ -68,6 +73,7 @@ public class Introduction : MonoBehaviour
     private void FinishedMoving()
     {
         material.SetTexture("_MainTex", fightingTexture);
+        introtext.gameObject.SetActive(false);
         scrollSpeedDevider = Mathf.Lerp(scrollSpeedDevider, 5, Time.deltaTime);
         blurCavas.GetComponent<CanvasGroup>().alpha -= Mathf.Clamp(Time.deltaTime, 0, 1);
 

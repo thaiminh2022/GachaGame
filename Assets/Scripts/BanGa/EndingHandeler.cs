@@ -37,11 +37,11 @@ public class EndingHandeler : MonoBehaviour
 
     private void Start()
     {
-        currentMoneyText.text = MoneyManager.instance?.GetMoney().ToString();
+        currentMoneyText.text = "Current Money: " + MoneyManager.instance?.GetMoney().ToString();
     }
     private void Update()
     {
-        currentChickenKillText.text = PlayerRocketController.instance.chickenKillCounts.ToString();
+        currentChickenKillText.text = "Chicken Money: " + PlayerRocketController.instance.chickenKillCounts.ToString();
     }
 
 }

@@ -10,7 +10,10 @@ public class ChickenEnemy : MonoBehaviour, IDamageAble
 
     [Header("Chicken Property")]
     [SerializeField] bool eggLayed;
-    [SerializeField] float eggLayRate;
+    [SerializeField] float minEggLayRate;
+    [SerializeField] float maxEggLayRate;
+    // private float eggLayRate; || Maybe use this
+
     [SerializeField] Transform eggLayPosition;
 
 
@@ -38,8 +41,13 @@ public class ChickenEnemy : MonoBehaviour, IDamageAble
 
         Instantiate(chickenObject.eggBullet, eggLayPosition.position, Quaternion.identity);
 
-        yield return new WaitForSeconds(eggLayRate);
+        yield return new WaitForSeconds(GetRandomSpawnRate());
         eggLayed = false;
+    }
+
+    private float GetRandomSpawnRate()
+    {
+        return Random.Range(minEggLayRate, maxEggLayRate);
     }
 
     public void OnDead()

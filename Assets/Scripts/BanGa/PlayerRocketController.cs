@@ -237,8 +237,11 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
     #endregion
     public void TakeDamage()
     {
-        Debug.Log("Ouch!");
-        Debug.Log("Im ded");
+        // Do this manually for better readability
+        ChickenSpawner.instance.SetIndexToMaxPlusOne();
+        ChickenSpawner.instance.DestroyAllCurrentEnemy();
+
+        ChickenSpawner.instance.OnFinishedTheGame?.Invoke();
     }
 
     public void OnDead()
