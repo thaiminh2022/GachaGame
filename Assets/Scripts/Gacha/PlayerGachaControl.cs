@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+
 public class PlayerGachaControl : MonoBehaviour
 {
     [Header("rolling items")]
@@ -15,8 +17,12 @@ public class PlayerGachaControl : MonoBehaviour
     [Header("Gotten items")]
     private List<ItemsObject> itemGotAfterRoll = new List<ItemsObject>();
 
-    [Header("Text UI")]
+    [Header("UI")]
     [SerializeField] private TextMeshProUGUI allRolledObjectsDisplayText;
+    [SerializeField] private TextMeshProUGUI playerMoneyDisplayText;
+
+    [Header("Inventory")]
+    private Inventory playerInventory;
 
     [Header("Others check")]
     private bool fiveStars = false;
@@ -26,11 +32,40 @@ public class PlayerGachaControl : MonoBehaviour
 
     private ProportionalWheelSelection wheelSelection = new ProportionalWheelSelection();
 
+    private void Start()
+    {
+        costPerTenRoll = costPerOneRoll * 10;
+
+        // !Might use this
+        // CMDebug.KeyCodeAction(KeyCode.R, () => { Debug.Log(playerInventory.GetItemList()); });
+
+        // TODO: make an save class and do inventory check
+        //         if (SaveClass.saveInventory != null)
+        //            playerInvectory = SaveClass.saveInventory;
+        //          else 
+        playerInventory = new Inventory();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (var item in playerInventory.GetItemList())
+            {
+                Debug.Log(item.itemsObject.name + " : " + item.ammout);
+            }
+        }
+
+        playerMoneyDisplayText.text = string.Format("{0} {1}", MoneyManager.instance.GetMoney(), MoneyManager.instance.currencyName);
+    }
+
     public void OnRollingOneTime()
     {
         // !Guared stateman
         // If player do not have enough money to do a roll, return 
         if (MoneyManager.instance.IsMoreOrEnoughValue(costPerOneRoll) == false) return;
+
+        itemGotAfterRoll.Clear();
 
         ItemsObject randomItem = wheelSelection.SelectItem(items);
         guaranteeLogicHandeler.rolledItem = randomItem;
@@ -38,10 +73,8 @@ public class PlayerGachaControl : MonoBehaviour
         // Roll one-time
         if (randomItem != null)
         {
-            // Debug the item 
-            Debug.Log(string.Format("{0}: {1}", randomItem.name, randomItem.rollType.ToString()));
             totalRollCounter++; // Add to the counter
-            // Reduce the money ammout
+                                // Reduce the money ammout
             MoneyManager.instance.ChangeMoneyByAmmout(-costPerOneRoll);
 
             // Add to the guaranteeLogic counter
@@ -64,6 +97,8 @@ public class PlayerGachaControl : MonoBehaviour
         // If player do not have enough money to do a roll, return 
         if (MoneyManager.instance.IsMoreOrEnoughValue(costPerTenRoll) == false) return;
 
+        itemGotAfterRoll.Clear();
+
         // Roll ten times
         for (int i = 0; i <= 9; i++)
         {
@@ -72,8 +107,6 @@ public class PlayerGachaControl : MonoBehaviour
 
             if (randomItem != null)
             {
-                // Debug the item 
-                Debug.Log(string.Format("{0}: {1}", randomItem.name, randomItem.rollType.ToString()));
                 totalRollCounter++; // Add to the counter
                 MoneyManager.instance.ChangeMoneyByAmmout(-costPerOneRoll); // Reduce the money ammout
 
@@ -127,11 +160,17 @@ public class PlayerGachaControl : MonoBehaviour
         {
             allRolledObjectsDisplayText.text += item.name + "\n";
         }
+
+    }
+    // Add this to events for better condition
+    public void AddRolledItemToInventory()
+    {
+        foreach (var item in itemGotAfterRoll)
+        {
+            playerInventory.AddToInventory(item, ammount: 1);
+        }
+
     }
 
-    private void Start()
-    {
-        costPerTenRoll = costPerOneRoll * 10;
-    }
 }
 

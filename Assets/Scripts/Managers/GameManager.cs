@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(message);
         }
+    }
+
+    public void SwitchScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public ItemsObject GetRandomGachaFourStars()
