@@ -6,6 +6,9 @@ using TMPro;
 
 public class PlayerGachaControl : MonoBehaviour
 {
+    public static PlayerGachaControl instance;
+
+
     [Header("rolling items")]
     public List<ItemsObject> items;
 
@@ -32,18 +35,39 @@ public class PlayerGachaControl : MonoBehaviour
 
     private ProportionalWheelSelection wheelSelection = new ProportionalWheelSelection();
 
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
     private void Start()
     {
         costPerTenRoll = costPerOneRoll * 10;
+        LoadAllSavedObjects();
 
-        // !Might use this
-        // CMDebug.KeyCodeAction(KeyCode.R, () => { Debug.Log(playerInventory.GetItemList()); });
+        void LoadAllSavedObjects()
+        {
+            // Get the save object from the manager
+            SaveObject saveObject = SavingManager.instance.GetSavedObject();
 
-        // TODO: make an save class and do inventory check
-        //         if (SaveClass.saveInventory != null)
-        //            playerInvectory = SaveClass.saveInventory;
-        //          else 
-        playerInventory = new Inventory();
+            // Check if this save object is null or not
+            if (saveObject != null)
+            {
+                // Check if is there an save inventory
+                if (saveObject.playerInventorySave != null)
+                {
+                    playerInventory = saveObject.playerInventorySave;
+                }
+                else playerInventory = new Inventory();
+
+                // Set total roll counter
+                totalRollCounter = saveObject.playerTotalRollsSave;
+                return;
+            }
+            // else:
+            playerInventory = new Inventory();
+
+        }
     }
 
     private void Update()
@@ -131,7 +155,6 @@ public class PlayerGachaControl : MonoBehaviour
 
         if (fourStars)
         {
-            Debug.Log("U get a four stars");
             guaranteeLogicHandeler.ResetCounters(rollTypes.FourStars);
 
             return GameManager.instance.GetRandomGachaFourStars();
@@ -142,7 +165,6 @@ public class PlayerGachaControl : MonoBehaviour
 
         if (fiveStars)
         {
-            Debug.Log("U get a five stars");
             guaranteeLogicHandeler.ResetCounters(rollTypes.FiveStars);
 
             return GameManager.instance.GetRandomGachaFiveStars();
@@ -172,5 +194,16 @@ public class PlayerGachaControl : MonoBehaviour
 
     }
 
+
+    #region Getter and setters
+    public Inventory GetInventory()
+    {
+        return playerInventory;
+    }
+    public int GetPlayerTotalRolls()
+    {
+        return totalRollCounter;
+    }
+    #endregion
 }
 

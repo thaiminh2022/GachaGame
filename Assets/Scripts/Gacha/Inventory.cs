@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[Serializable]
 public class Inventory
 {
+    [SerializeField]
     private List<Item> items = new List<Item>();
+    [SerializeField]
     private List<string> itemsStringVersion = new List<string>();
 
     public void AddToInventory(ItemsObject itemsObject, int ammount = 0)
@@ -45,10 +47,11 @@ public class Inventory
     }
 }
 
-public class Item : IComparable<Item>
+[Serializable]
+public class Item
 {
-    public ItemsObject itemsObject { get; private set; }
-    public int ammout { get; private set; }
+    public ItemsObject itemsObject;
+    public int ammout;
 
     public Item(ItemsObject itemsObject, int ammout)
     {

@@ -18,6 +18,11 @@ public class MoneyManager : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
     }
+    private void Start()
+    {
+        if (SavingManager.instance.GetSavedObject() != null)
+            SetMoney(SavingManager.instance.GetSavedObject().totalMoneySave);
+    }
 
     // Add values to money
     public void ChangeMoneyByAmmout(float ammout)
