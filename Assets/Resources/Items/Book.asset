@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
-  m_Name: IU PE 2
+  m_Name: Book
   m_EditorClassIdentifier: 
-  name: iu pe 25
-  rollType: 1
-  percentage: 10
+  name: Sach
+  description: 
+  rollType: 2
+  percentage: 60
+  representSprite: {fileID: -6769762884997959720, guid: 3b875b6a4fd141b49a399413ddca4c53, type: 3}

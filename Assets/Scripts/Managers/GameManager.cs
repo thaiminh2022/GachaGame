@@ -36,6 +36,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void DestroyAllChildInGameObject(Transform parentGameobject)
+    {
+        if (parentGameobject.childCount > 0)
+        {
+            for (int i = 0; i < parentGameobject.childCount; i++)
+            {
+                GameObject.Destroy(parentGameobject.GetChild(i).gameObject);
+            }
+        }
+    }
+
+
     public ItemsObject GetRandomGachaFourStars()
     {
         int i = Random.Range(0, everyFourStar.Count);

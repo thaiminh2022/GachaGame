@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
-
-
 
 public class PlayerGachaControl : MonoBehaviour
 {
@@ -23,6 +22,19 @@ public class PlayerGachaControl : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI allRolledObjectsDisplayText;
     [SerializeField] private TextMeshProUGUI playerMoneyDisplayText;
+
+    // Inventory Ui Onlick
+    [SerializeField] private GameObject inventoryItemTemplate;
+
+    [SerializeField] private GameObject inventoryDisplayUi;
+    [SerializeField] private GameObject inventoryDisplayCt;
+
+    //Description Ui
+    [SerializeField] TextMeshProUGUI descriptionTitleText;
+    [SerializeField] TextMeshProUGUI descriptionText;
+
+    // Play Ui
+    [SerializeField] GameObject playDisplayUi;
 
     [Header("Inventory")]
     private Inventory playerInventory;
@@ -86,11 +98,13 @@ public class PlayerGachaControl : MonoBehaviour
     public void OnRollingOneTime()
     {
         // !Guared stateman
-        // If player do not have enough money to do a roll, return 
         if (MoneyManager.instance.IsMoreOrEnoughValue(costPerOneRoll) == false) return;
 
+
+        // Clear the item after rolls for more item
         itemGotAfterRoll.Clear();
 
+        // Get the random item and pass to the logic handeler
         ItemsObject randomItem = wheelSelection.SelectItem(items);
         guaranteeLogicHandeler.rolledItem = randomItem;
 
@@ -118,7 +132,6 @@ public class PlayerGachaControl : MonoBehaviour
     public void OnRollingTenTimes()
     {
         // !Guared stateman
-        // If player do not have enough money to do a roll, return 
         if (MoneyManager.instance.IsMoreOrEnoughValue(costPerTenRoll) == false) return;
 
         itemGotAfterRoll.Clear();
@@ -146,6 +159,53 @@ public class PlayerGachaControl : MonoBehaviour
         }
         UnityEventsAll.instance.onFinishedRolling?.Invoke();
     }
+
+    public void OnOpenInventory()
+    {
+
+        inventoryDisplayUi.SetActive(true);
+        descriptionTitleText.text = "";
+        descriptionText.text = "";
+
+        var itemList = playerInventory.GetItemList();
+
+        if (itemList.Count > 0 && inventoryDisplayUi.activeSelf == true)
+        {
+            //Destroy if there's already exist any objects
+            GameManager.instance.DestroyAllChildInGameObject(inventoryDisplayCt.transform);
+            foreach (var item in itemList)
+            {
+                // Create and set the parent
+                GameObject go = Instantiate(inventoryItemTemplate, Vector3.zero, Quaternion.identity);
+                go.transform.SetParent(inventoryDisplayCt.transform, false);
+
+                // Change the image type
+                go.transform.GetChild(0).GetComponent<Image>().sprite = item.itemsObject.representSprite;
+                go.GetComponentInChildren<TextMeshProUGUI>().text = item.ammout.ToString();
+
+                go.GetComponent<Button>().onClick.AddListener(() => ChangeDescription(item.itemsObject));
+            }
+        }
+    }
+    public void OnOpenPlayMenu()
+    {
+        playDisplayUi.SetActive(true);
+    }
+
+    public void TurnOffInventory()
+    {
+        inventoryDisplayUi.SetActive(false);
+    }
+    public void TurnOffPlayMenu()
+    {
+        playDisplayUi.SetActive(false);
+    }
+    private void ChangeDescription(ItemsObject itemObject)
+    {
+        descriptionTitleText.text = itemObject.name;
+        descriptionText.text = itemObject.description;
+    }
+
 
     private ItemsObject GetSpecialStars()
     {
@@ -193,6 +253,7 @@ public class PlayerGachaControl : MonoBehaviour
         }
 
     }
+
 
 
     #region Getter and setters

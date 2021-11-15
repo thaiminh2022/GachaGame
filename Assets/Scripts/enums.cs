@@ -3,8 +3,8 @@ public enum rollTypes
     FiveStars,
     FourStars,
     ThreeStars,
-    Trash,
-    TrashJr
+    TwoStars,
+    Trash
 };
 
 public enum BulletTypes

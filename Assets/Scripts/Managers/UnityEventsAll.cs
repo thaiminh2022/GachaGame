@@ -6,6 +6,7 @@ public class UnityEventsAll : MonoBehaviour
     public static UnityEventsAll instance;
 
     public UnityEvent onFinishedRolling;
+    //public UnityEvent onOpenInventory;
 
     private void Awake()
     {

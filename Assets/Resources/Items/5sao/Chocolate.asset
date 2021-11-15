@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
-  m_Name: IU PE 3
+  m_Name: Chocolate
   m_EditorClassIdentifier: 
-  name: iu pe 50
-  rollType: 2
-  percentage: 70
+  name: Chocolate
+  description: 
+  rollType: 0
+  percentage: 1
+  representSprite: {fileID: 0}

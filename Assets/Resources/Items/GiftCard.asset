@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
-  m_Name: IU PE 1
+  m_Name: GiftCard
   m_EditorClassIdentifier: 
-  name: iu pe 1
-  rollType: 0
-  percentage: 0.6
+  name: Thiep
+  description: 
+  rollType: 2
+  percentage: 75
+  representSprite: {fileID: 0}

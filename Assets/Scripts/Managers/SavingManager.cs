@@ -6,47 +6,26 @@ public class SavingManager : MonoBehaviour
 
     public static SavingManager instance;
 
-    // ? Is it worth the risk of losing data
-    // [SerializeField] float updateSaveObjectDelay = .1f;
-    // [SerializeField] float updateSaveDelay = .1f;
-
-    [Header("Need to save Objects")]
-    [SerializeField] private Inventory playerInventory;
-    [SerializeField] private int playerTotalRolls;
-    [SerializeField] private float totalMoney;
-
     [Header("This section saved Obecjt")]
     private SaveObject saveObject = null;
-
     private void Awake()
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
-    }
-    private void Start()
-    {
-        // Load the save
+
         Load();
     }
     private void Update()
     {
-        UpdateSaveObject();
         Save();
-    }
-    private void UpdateSaveObject()
-    {
-        if (PlayerGachaControl.instance != null)
-        {
-            playerInventory = PlayerGachaControl.instance.GetInventory();
-            playerTotalRolls = PlayerGachaControl.instance.GetPlayerTotalRolls();
-        }
-
-        if (MoneyManager.instance != null)
-            totalMoney = (float)MoneyManager.instance.GetMoney();
     }
 
     public void Save()
     {
+        var playerInventory = PlayerGachaControl.instance.GetInventory();
+        var playerTotalRolls = PlayerGachaControl.instance.GetPlayerTotalRolls();
+        var totalMoney = MoneyManager.instance.GetMoney();
+
         // Create anew save Obejct
         SaveObject saveObjectSave = new SaveObject
         {
@@ -59,11 +38,13 @@ public class SavingManager : MonoBehaviour
         string json = JsonUtility.ToJson(saveObjectSave, true);
 
         // Write that json to a file. aka save.dontopenthis
+        // Debug.Log(Application.persistentDataPath);
         File.WriteAllText(Application.persistentDataPath + "/save.dontopenthis", json);
 
     }
     public void Load()
     {
+
         // Check if the file exist, else dont load
         if (File.Exists(Application.persistentDataPath + "/save.dontopenthis"))
         {
@@ -71,7 +52,9 @@ public class SavingManager : MonoBehaviour
 
             // Attach the Object to current seection saveObject
             saveObject = JsonUtility.FromJson<SaveObject>(savedString);
+
         }
+
     }
 
     public SaveObject GetSavedObject()
