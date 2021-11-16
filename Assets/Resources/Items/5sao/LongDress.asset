@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: LongDress
   m_EditorClassIdentifier: 
-  name: Ao dai
-  description: 
+  name: "\xC1o d\xE0i"
+  description: "A special costume,\nIn the time of \"Eroupianized\".\nA traidion
+    dress for the Vietnamese woman,\nWith a complex design to let out the beauty.\nToday
+    the Vietnamese wear it on special occasions,\nFemale students wear it every Monday,\nFemale
+    teachers wear it everyday,\nBut it almost not a requirement, \nJust a traditional
+    thing to do. "
   rollType: 0
   percentage: 1
-  representSprite: {fileID: 0}
+  representSprite: {fileID: 21300000, guid: 5ddc11d430e67464ab1ced626d10703d, type: 3}

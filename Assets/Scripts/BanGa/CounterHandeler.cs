@@ -9,7 +9,7 @@ public class CounterHandeler : MonoBehaviour
     public void UpdateKillCounter()
     {
         int killsAmmmout = PlayerRocketController.instance.chickenKillCounts;
-        killCouter.text = "kills: " + killsAmmmout.ToString();
+        killCouter.text = killsAmmmout.ToString();
     }
     public void UpdateCurrentPhase()
     {

@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: GiftCard
   m_EditorClassIdentifier: 
-  name: Thiep
-  description: 
+  name: Gilf card
+  description: 'A giftcard for all general purposes,
+
+    Maybe it''s for a party,
+
+    For
+    a special day,
+
+    To the person you love,
+
+    To teachers who  always care
+    about you. '
   rollType: 2
   percentage: 75
-  representSprite: {fileID: 0}
+  representSprite: {fileID: 21300000, guid: c27258fed78134845848319e8320fa29, type: 3}

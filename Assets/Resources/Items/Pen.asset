@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: Pen
   m_EditorClassIdentifier: 
-  name: But May
-  description: 
+  name: Pen
+  description: 'A wonderful object to note,
+
+    Maybe something to play,
+
+    Remind
+    us about the past,
+
+    When students carefree. '
   rollType: 2
   percentage: 50
-  representSprite: {fileID: 0}
+  representSprite: {fileID: 21300000, guid: 150b3d0ba3437e0488a74591388fe166, type: 3}

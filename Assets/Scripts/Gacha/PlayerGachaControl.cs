@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -20,20 +21,28 @@ public class PlayerGachaControl : MonoBehaviour
     private List<ItemsObject> itemGotAfterRoll = new List<ItemsObject>();
 
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI allRolledObjectsDisplayText;
     [SerializeField] private TextMeshProUGUI playerMoneyDisplayText;
 
-    // Inventory Ui Onlick
+    [Header("Display rolled Ui")]
+
+    [SerializeField] Color FourStarsColor;
+    [SerializeField] Color FiveStarsColor;
+    [SerializeField] Color TwoStarsColor;
+    [SerializeField] GameObject displayRolledTemplate;
+    [SerializeField] GameObject displayRolledCt;
+    [SerializeField] float startTimeBeforeSpawnDisplay = .5f;
+
+    [Header("Ui On clikc")]
     [SerializeField] private GameObject inventoryItemTemplate;
 
     [SerializeField] private GameObject inventoryDisplayUi;
     [SerializeField] private GameObject inventoryDisplayCt;
 
-    //Description Ui
+    [Header("Description Ui")]
     [SerializeField] TextMeshProUGUI descriptionTitleText;
     [SerializeField] TextMeshProUGUI descriptionText;
 
-    // Play Ui
+    [Header("Play Ui")]
     [SerializeField] GameObject playDisplayUi;
 
     [Header("Inventory")]
@@ -95,6 +104,7 @@ public class PlayerGachaControl : MonoBehaviour
         playerMoneyDisplayText.text = string.Format("{0} {1}", MoneyManager.instance.GetMoney(), MoneyManager.instance.currencyName);
     }
 
+    #region Rolling
     public void OnRollingOneTime()
     {
         // !Guared stateman
@@ -160,6 +170,11 @@ public class PlayerGachaControl : MonoBehaviour
         UnityEventsAll.instance.onFinishedRolling?.Invoke();
     }
 
+    #endregion
+
+    #region Inventory
+
+
     public void OnOpenInventory()
     {
 
@@ -202,7 +217,7 @@ public class PlayerGachaControl : MonoBehaviour
     }
     private void ChangeDescription(ItemsObject itemObject)
     {
-        descriptionTitleText.text = itemObject.name;
+        descriptionTitleText.text = string.Format("{0} - {1}", itemObject.name, itemObject.rollType.ToString());
         descriptionText.text = itemObject.description;
     }
 
@@ -234,17 +249,6 @@ public class PlayerGachaControl : MonoBehaviour
 
     }
 
-    //TODO: ADD A SPECIAL DISPLAY WHEN AN ITEM IS DUPICATE
-    public void DisplayRolledItem()
-    {
-        allRolledObjectsDisplayText.text = "";
-        foreach (var item in itemGotAfterRoll)
-        {
-            allRolledObjectsDisplayText.text += item.name + "\n";
-        }
-
-    }
-    // Add this to events for better condition
     public void AddRolledItemToInventory()
     {
         foreach (var item in itemGotAfterRoll)
@@ -253,6 +257,63 @@ public class PlayerGachaControl : MonoBehaviour
         }
 
     }
+
+    #endregion
+
+    #region Display Rolling Item
+
+    // Handel item display
+    public void DisplayRolledItem()
+    {
+
+        StartCoroutine(displayRolledItemLogic());
+
+    }
+    IEnumerator displayRolledItemLogic()
+    {
+        GameManager.instance.DestroyAllChildInGameObject(displayRolledCt.transform);
+
+        foreach (var item in itemGotAfterRoll)
+        {
+            RolledObjectTemplate goTP = Instantiate(displayRolledTemplate, Vector3.zero, Quaternion.identity).GetComponent<RolledObjectTemplate>();
+
+            goTP.transform.SetParent(displayRolledCt.transform, false);
+
+            goTP.spriteDisplay.sprite = item.representSprite;
+            goTP.textDisplay.text = item.name;
+
+            switch (item.rollType)
+            {
+                case rollTypes.FiveStars:
+                    goTP.ButtonDisply.GetComponent<Image>().color = FiveStarsColor;
+                    break;
+                case rollTypes.FourStars:
+                    goTP.ButtonDisply.GetComponent<Image>().color = FourStarsColor;
+                    break;
+                case rollTypes.TwoStars:
+                    goTP.ButtonDisply.GetComponent<Image>().color = TwoStarsColor;
+                    break;
+                default:
+                    break;
+
+            }
+
+
+            goTP.ButtonDisply.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                OnOpenInventory();
+                ChangeDescription(item);
+            });
+
+            yield return new WaitForSeconds(startTimeBeforeSpawnDisplay);
+
+        }
+
+    }
+    #endregion
+
+    // Add this to events for better condition
+
 
 
 

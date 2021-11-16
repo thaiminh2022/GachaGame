@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: Flower
   m_EditorClassIdentifier: 
-  name: Hoa
-  description: 
+  name: Flower
+  description: 'A beautiful creature that god added to this world.
+
+    Maybe to
+    please the eyes of human,
+
+    Or maybe a decoration ,
+
+    Or something hidden
+    that we cannot understand yet.'
   rollType: 3
   percentage: 80
-  representSprite: {fileID: 21300000, guid: 1fe3c74e461d11947a727307057bce4a, type: 3}
+  representSprite: {fileID: 21300000, guid: eb193cac7602f8742bf6672447a5780a, type: 3}

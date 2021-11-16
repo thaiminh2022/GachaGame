@@ -19,6 +19,9 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
     [Header("Events")]
     public UnityEvent OnTouchingTheScreen;
     public UnityEvent OnKillAChicken;
+    public UnityEvent OnPlayerDie;
+
+    //public UnityEvent OnShootBullet;
 
     [Header("Rocket Current Stat")]
     public BulletObject bulletObject;
@@ -81,6 +84,7 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
         if (bulletObject == null) return;
         if (bulletAlreadySpawn == true) return;
 
+        OnShootBullet();
 
         // Check for the bullet type
         switch (bulletObject.bulletType)
@@ -97,12 +101,20 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
                 break;
         }
     }
+    public void OnShootBullet()
+    {
+        SoundsManager.instance.Play("RocketShoot");
+    }
     public void KillAChiken()
     {
         chickenKillCounts++;
+
+        SoundsManager.instance.Play("ChikenDie");
     }
     public void TouchALootBox(BulletTypes lootBoxType)
     {
+
+
         switch (lootBoxType)
         {
             case BulletTypes.Auto:
@@ -237,11 +249,21 @@ public class PlayerRocketController : MonoBehaviour, IDamageAble
     #endregion
     public void TakeDamage()
     {
+
+        OnPlayerDie?.Invoke();
+
+
+    }
+    public void PlayerDie()
+    {
         // Do this manually for better readability
         ChickenSpawner.instance.SetIndexToMaxPlusOne();
         ChickenSpawner.instance.DestroyAllCurrentEnemy();
+        SoundsManager.instance.Play("RocketHit");
 
         ChickenSpawner.instance.OnFinishedTheGame?.Invoke();
+
+        gameObject.SetActive(false);
     }
 
     public void OnDead()

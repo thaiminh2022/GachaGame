@@ -41,7 +41,7 @@ public class EndingHandeler : MonoBehaviour
     }
     private void Update()
     {
-        currentChickenKillText.text = "Chicken Money: " + PlayerRocketController.instance.chickenKillCounts.ToString();
+        currentChickenKillText.text = PlayerRocketController.instance.chickenKillCounts.ToString();
     }
 
 }

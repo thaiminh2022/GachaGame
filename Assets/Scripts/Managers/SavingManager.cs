@@ -15,9 +15,9 @@ public class SavingManager : MonoBehaviour
 
         Load();
     }
-    private void Update()
+    private void Start()
     {
-        Save();
+        InvokeRepeating("Save", 1f, 2f);
     }
 
     public void Save()
@@ -68,6 +68,10 @@ public class SavingManager : MonoBehaviour
         {
             Save();
         }
+    }
+    private void OnApplicationQuit()
+    {
+        Save();
     }
 }
 public class SaveObject

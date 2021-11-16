@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: Painting
   m_EditorClassIdentifier: 
-  name: Buc hoa
-  description: 
+  name: Paiting
+  description: "An art,\nMade by an artist, \nWho knows when will they get recognized,\nBut
+    without them, we will be missing alot. "
   rollType: 1
   percentage: 10
-  representSprite: {fileID: 0}
+  representSprite: {fileID: 21300000, guid: e2e916143cce3a648a9d2a23da795260, type: 3}

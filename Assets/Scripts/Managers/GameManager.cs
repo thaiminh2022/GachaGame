@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,11 +30,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SwitchScene(int sceneIndex)
-    {
-        SceneManager.LoadScene(sceneIndex);
-    }
-
     public void DestroyAllChildInGameObject(Transform parentGameobject)
     {
         if (parentGameobject.childCount > 0)
@@ -45,6 +39,21 @@ public class GameManager : MonoBehaviour
                 GameObject.Destroy(parentGameobject.GetChild(i).gameObject);
             }
         }
+    }
+
+    public List<Transform> GetAllChildTransform(Transform parentTranform)
+    {
+        List<Transform> returnList = new List<Transform>();
+
+        if (parentTranform.childCount > 0)
+        {
+            for (int i = 0; i < parentTranform.childCount; i++)
+            {
+                returnList.Add(parentTranform.GetChild(i));
+            }
+        }
+
+        return returnList;
     }
 
 

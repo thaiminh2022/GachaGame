@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: Book
   m_EditorClassIdentifier: 
-  name: Sach
-  description: 
+  name: Book
+  description: 'Something to read,
+
+    Or something really meaningful to the receiver.
+
+    Who
+    knows.'
   rollType: 2
   percentage: 60
   representSprite: {fileID: -6769762884997959720, guid: 3b875b6a4fd141b49a399413ddca4c53, type: 3}

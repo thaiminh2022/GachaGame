@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: LOVE YOU
   m_EditorClassIdentifier: 
-  name: IU PE
-  description: 
+  name: Love
+  description: hmm, a special something for someone special to the creator.
   rollType: 0
   percentage: 0.1
-  representSprite: {fileID: 0}
+  representSprite: {fileID: 21300000, guid: 5f01c65172d802740b77fccdc3ececf4, type: 3}
