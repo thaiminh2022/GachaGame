@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class UiHandeler : MonoBehaviour
 {
-    public void SwitchScene(int index)
+    public void SwitchScene(string name)
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(name);
     }
 
     public void SetActive(GameObject go)
@@ -28,5 +28,9 @@ public class UiHandeler : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

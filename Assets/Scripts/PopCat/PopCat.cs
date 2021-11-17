@@ -81,6 +81,6 @@ public class PopCat : MonoBehaviour
     {
         ClickCounter = ClickCounter < int.MaxValue ? ClickCounter : int.MaxValue;
 
-        clickTextCounter.text = "Tap: " + ClickCounter.ToString();
+        clickTextCounter.text = ClickCounter.ToString();
     }
 }

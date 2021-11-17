@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6230ca2de2a2b40888b02c2186194b, type: 3}
   m_Name: Painting
   m_EditorClassIdentifier: 
-  name: Paiting
+  name: Painting
   description: "An art,\nMade by an artist, \nWho knows when will they get recognized,\nBut
     without them, we will be missing alot. "
   rollType: 1

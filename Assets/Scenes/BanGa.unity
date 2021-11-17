@@ -379,7 +379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 69
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52d1c817faf941c44b802c1b605c1284, type: 2}
   m_sharedMaterial: {fileID: 9073711230450916648, guid: 52d1c817faf941c44b802c1b605c1284, type: 2}
@@ -2566,13 +2566,13 @@ MonoBehaviour:
       - m_Target: {fileID: 403721099}
         m_TargetAssemblyTypeName: UiHandeler, Assembly-CSharp
         m_MethodName: SwitchScene
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &671284031
@@ -2940,7 +2940,7 @@ MonoBehaviour:
   spreadBullet: {fileID: 6098908715212046651, guid: 310f8f5709bceed4c9eab39a014d5f9b, type: 3}
   autoBullet: {fileID: 6098908715212046651, guid: aee9b7429d086b54e94fd938907aae39, type: 3}
   chickenKillCounts: 0
-  DebugNoPhone: 1
+  DebugNoPhone: 0
 --- !u!1 &814050393
 GameObject:
   m_ObjectHideFlags: 0
@@ -12559,7 +12559,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

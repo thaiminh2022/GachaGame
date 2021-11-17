@@ -18,6 +18,7 @@ public class EndingHandeler : MonoBehaviour
     {
 
         MoneyManager.instance?.ChangeMoneyByAmmout(PlayerRocketController.instance.chickenKillCounts * 10);
+        currentMoneyText.text = "Current Money: " + MoneyManager.instance?.GetMoney().ToString();
 
     }
     public void EnableCanvas()
