@@ -1,8 +1,8 @@
 # GachaGame
-A repository for a school project, probably gonna update it and make it a real game.
+Một trò chơi nhân ngày Nhà Giáo Việt Nam 20/11
 
 # Installation
-TEST 1 TEST 2
+Bên góc phải màn hình ấn vào release và click tải .apk phiên bản mới nhất
 
 # Giao Vien
 Vao Asset > Scripts để xem những file lệnh.
