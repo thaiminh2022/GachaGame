@@ -5619,6 +5619,32 @@ MonoBehaviour:
     - {fileID: 5597970008578325638, guid: 09fabadb2d23748468fb10ec2586afdd, type: 3}
     - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
     ammout: 10
+  - name: 1-4
+    posibleChickenSpawn:
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 09fabadb2d23748468fb10ec2586afdd, type: 3}
+    - {fileID: 5597970008578325638, guid: 00de3d8047fab474f8df24ad898bf846, type: 3}
+    ammout: 10
+  - name: 1-5
+    posibleChickenSpawn:
+    - {fileID: 5597970008578325638, guid: 16d2ad76b24ac7944ab055db45d768b7, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 09fabadb2d23748468fb10ec2586afdd, type: 3}
+    - {fileID: 5597970008578325638, guid: 00de3d8047fab474f8df24ad898bf846, type: 3}
+    ammout: 10
+  - name: 1-6
+    posibleChickenSpawn:
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
+    - {fileID: 5597970008578325638, guid: 09fabadb2d23748468fb10ec2586afdd, type: 3}
+    - {fileID: 5597970008578325638, guid: 00de3d8047fab474f8df24ad898bf846, type: 3}
+    - {fileID: 5597970008578325638, guid: 16d2ad76b24ac7944ab055db45d768b7, type: 3}
+    - {fileID: 5597970008578325638, guid: 00de3d8047fab474f8df24ad898bf846, type: 3}
+    ammout: 10
   - name: End
     posibleChickenSpawn:
     - {fileID: 5597970008578325638, guid: 53d4fd0a6771b604593b9f057b152797, type: 3}
