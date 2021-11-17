@@ -60,37 +60,38 @@ public class PlayerGachaControl : MonoBehaviour
     {
         if (instance == null) instance = this;
         else if (instance != this) Destroy(gameObject);
+
     }
     private void Start()
     {
         costPerTenRoll = costPerOneRoll * 10;
+
         LoadAllSavedObjects();
 
-        void LoadAllSavedObjects()
-        {
-            // Get the save object from the manager
-            SaveObject saveObject = SavingManager.instance.GetSavedObject();
-
-            // Check if this save object is null or not
-            if (saveObject != null)
-            {
-                // Check if is there an save inventory
-                if (saveObject.playerInventorySave != null)
-                {
-                    playerInventory = saveObject.playerInventorySave;
-                }
-                else playerInventory = new Inventory();
-
-                // Set total roll counter
-                totalRollCounter = saveObject.playerTotalRollsSave;
-                return;
-            }
-            // else:
-            playerInventory = new Inventory();
-
-        }
     }
+    void LoadAllSavedObjects()
+    {
+        // Get the save object from the manager
+        SaveObject saveObject = SavingManager.instance.GetSavedObject();
 
+        // Check if this save object is null or not
+        if (saveObject != null)
+        {
+            // Check if is there an save inventory
+            if (saveObject.playerInventorySave != null)
+            {
+                playerInventory = saveObject.playerInventorySave;
+            }
+            else playerInventory = new Inventory();
+
+            // Set total roll counter
+            totalRollCounter = saveObject.playerTotalRollsSave;
+            return;
+        }
+        // else:
+        playerInventory = new Inventory();
+
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -314,7 +315,14 @@ public class PlayerGachaControl : MonoBehaviour
 
     // Add this to events for better condition
 
-
+    // private void OnApplicationFocus(bool focusStatus)
+    // {
+    //     if (focusStatus == false) SavingManager.instance.Save();
+    // }
+    private void OnApplicationQuit()
+    {
+        SavingManager.instance.Save();
+    }
 
 
     #region Getter and setters

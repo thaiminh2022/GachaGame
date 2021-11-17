@@ -7,6 +7,10 @@ public class UiHandeler : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+    public void SwitchScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 
     public void SetActive(GameObject go)
     {
