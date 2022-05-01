@@ -10,10 +10,7 @@ Bên góc phải màn hình ấn vào release và click tải .apk phiên bản 
 Hay bạn có thể nhấn vào đường link: https://github.com/thaiminh2022/GachaGame/releases <br/>
 Lưu ý: Nếu bạn đang sử dụng Bluestacks để chơi game. Nhà phát hành không đảm bảo game hoạt động. <br/>
 
-# Giáo viên
-Vao Asset > Scripts để xem những file lệnh.
-
-# Nhà phát hành
-Facebook: https://www.facebook.com/thaiminh2022 <br/>
+# Team chúng mình
+Facebook: https://www.facebook.com/realHumita69 <br/>
 Youtube: https://www.youtube.com/channel/UCrmCeaeVzVAkHS-dARlEU9A <br/>
 Email: thaiminh2022@gmail.com ( Gửi với chủ đề: GachaGame )
